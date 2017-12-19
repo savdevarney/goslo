@@ -7,7 +7,6 @@
 </head>
 <body>
   <div id="test-msg"></div>
-
   <div class="counter">
     <p><b>SloCycl: a 10 second breath cycle (5 second inhales, 5 second exhales). <br> SloCycls are associated with peak calmness and optimal focus.</b></p>
     <p><i>Click or press and hold during inhale, release during exhale.
@@ -28,45 +27,44 @@ let clickCount = 0;
 
 let interface = document.querySelector(".interface");
 let circle = document.querySelector(".circle");
-let msg = document.querySelector("#tst-msg");
+let msg = document.querySelector("#test-msg");
 
 function updateCycls() {
-  let cyclsDisplay  = document.querySelector('#cycls');
+  let cyclsDisplay = document.querySelector('#cycls');
   cyclsDisplay.innerHTML = cycls;
 };
 
 updateCycls()
 
-/* interface.addEventListener('click', function(){
-  clickCount +=1;
-  if (clickCount === 1) {
-    circle.classList.add('expanding');
-  }
-  // on every even click, play animation in reverse
-  if (clickCount % 2 === 0) {
-  circle.classList.remove('expanding');
-  // on every odd click after first, remove reverse effect, update cycls
-  } else if (!(clickCount % 2 === 0) && (clickCount > 1)) {
-    circle.classList.add('expanding');
-  }
-});
-
-*/
-
-interface.addEventListener(('mousedown touchstart'), function(ev) {
+function expand() {
   circle.classList.add('expanding');
-  if (ev.type === 'touchstart') {
-    msg.innerHTML = "touchstart event captured";
-  } else if (ev.type === 'mousedown') {
-    msg.innerHTML = "mousedown event captured";
-  }
   console.log('added expanding');
-});
+};
 
-interface.addEventListener(('mouseup touchend'), function(ev) {
+function contract() {
   circle.classList.remove('expanding');
   console.log('removed expanding');
+};
+
+interface.addEventListener('mousedown', function(ev) {
+  expand();
 });
+
+interface.addEventListener('touchstart', function(ev) {
+  expand();
+  msg.innerHTML = "touchstart event captured";
+});
+
+
+interface.addEventListener('mouseup', function(ev) {
+  contract();
+});
+
+interface.addEventListener('touchend', function(ev) {
+  contract();
+  msg.innerHTML = "touchend event captured";
+});
+
 
 circle.addEventListener('transitionend', function() {
   cycls += 0.5;
