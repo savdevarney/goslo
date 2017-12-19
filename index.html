@@ -51,12 +51,14 @@ updateCycls()
 
 */
 
-interface.addEventListener(('mousedown' || 'touchstart'), function () {
+interface.addEventListener(('mousedown touchstart'), function (ev) {
+  ev.preventDefault();
   circle.classList.add('expanding');
   console.log('added expanding');
 });
 
-interface.addEventListener(('mouseup' || 'touchend'), function() {
+interface.addEventListener(('mouseup touchend'), function(ev) {
+  ev.preventDefault();
   circle.classList.remove('expanding');
   console.log('removed expanding');
 });
