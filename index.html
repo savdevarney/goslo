@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GoSlo: a breath pacer and counter for your meditations</title>
+  <link href="./resources/css/index.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="counter">
+    <p><b>SloCycl: a 10 second breath cycle (5 second inhales, 5 second exhales). <br> SloCycls are associated with peak calmness and optimal focus.</b></p>
+    <p><i>Click or press and hold during inhale, release during exhale.
+      </i></p>
+    <br>
+    <p><b>SloCycls:</b></p>
+    <div id='cycls'></div>
+  </div>
+    <div class="interface">
+      <div class="circle">
+      </div>
+  </div>
+
+<script>
+
+let cycls = 0;
+let clickCount = 0;
+
+let interface = document.querySelector(".interface");
+let circle = document.querySelector(".circle");
+
+function updateCycls() {
+  let cyclsDisplay  = document.querySelector('#cycls');
+  cyclsDisplay.innerHTML = cycls;
+};
+
+updateCycls()
+
+/* interface.addEventListener('click', function(){
+  clickCount +=1;
+  if (clickCount === 1) {
+    circle.classList.add('expanding');
+  }
+  // on every even click, play animation in reverse
+  if (clickCount % 2 === 0) {
+  circle.classList.remove('expanding');
+  // on every odd click after first, remove reverse effect, update cycls
+  } else if (!(clickCount % 2 === 0) && (clickCount > 1)) {
+    circle.classList.add('expanding');
+  }
+});
+
+*/
+
+interface.addEventListener(('mousedown' || 'touchstart'), function () {
+  circle.classList.add('expanding');
+  console.log('added expanding');
+});
+
+interface.addEventListener(('mouseup' || 'touchend'), function() {
+  circle.classList.remove('expanding');
+  console.log('removed expanding');
+});
+
+circle.addEventListener('transitionend', function() {
+  cycls += 0.5;
+  updateCycls();
+});
+
+</script>
+
+</body>
+</html>
