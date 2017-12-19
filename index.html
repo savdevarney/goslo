@@ -6,6 +6,7 @@
   <link href="./resources/css/index.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+  <div id="test-msg"></div>
 
   <div class="counter">
     <p><b>SloCycl: a 10 second breath cycle (5 second inhales, 5 second exhales). <br> SloCycls are associated with peak calmness and optimal focus.</b></p>
@@ -27,6 +28,7 @@ let clickCount = 0;
 
 let interface = document.querySelector(".interface");
 let circle = document.querySelector(".circle");
+let msg = document.querySelector("tst-msg");
 
 function updateCycls() {
   let cyclsDisplay  = document.querySelector('#cycls');
@@ -51,9 +53,14 @@ updateCycls()
 
 */
 
-interface.addEventListener(('mousedown touchstart'), function (ev) {
+interface.addEventListener(('mousedown touchstart'), function(ev) {
   ev.preventDefault();
   circle.classList.add('expanding');
+  if (ev.type === 'touchstart') {
+    msg.innerHTML = "touchstart event captured";
+  } else if (ev.type === 'mousedown') {
+    msg.innerHTML = "mousedown event captured";
+  }
   console.log('added expanding');
 });
 
