@@ -54,7 +54,6 @@ updateCycls()
 */
 
 interface.addEventListener(('mousedown touchstart'), function(ev) {
-  ev.preventDefault();
   circle.classList.add('expanding');
   if (ev.type === 'touchstart') {
     msg.innerHTML = "touchstart event captured";
@@ -65,7 +64,6 @@ interface.addEventListener(('mousedown touchstart'), function(ev) {
 });
 
 interface.addEventListener(('mouseup touchend'), function(ev) {
-  ev.preventDefault();
   circle.classList.remove('expanding');
   console.log('removed expanding');
 });
